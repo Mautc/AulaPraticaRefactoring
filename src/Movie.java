@@ -5,19 +5,36 @@ public class Movie {
     public static final int  NEW_RELEASE = 1;
 
     private String _title;
-    private int _priceCode;
+    // REMOVIDO: private int _priceCode;
+
+    // NOVO CAMPO: Usa a classe Price
+    private Price _price;
 
     public Movie(String title, int priceCode) {
         _title = title;
-        _priceCode = priceCode;
+        setPriceCode(priceCode); // Chama o novo setPriceCode
     }
 
+    // ATUALIZADO: Delega a responsabilidade para o objeto _price
     public int getPriceCode() {
-        return _priceCode;
+        return _price.getPriceCode();
     }
 
+    // ATUALIZADO: Cria a classe de preço correta e atribui a _price
     public void setPriceCode(int arg) {
-        _priceCode = arg;
+        switch (arg) {
+            case REGULAR:
+                _price = new RegularPrice();
+                break;
+            case CHILDRENS:
+                _price = new ChildrensPrice();
+                break;
+            case NEW_RELEASE:
+                _price = new NewReleasePrice();
+                break;
+            default:
+                throw new IllegalArgumentException("Incorrect Price Code");
+        }
     }
 
     public String getTitle (){
@@ -45,11 +62,9 @@ public class Movie {
         return result;
     }
 
-    // NOVO MÉTODO EXTRAÍDO E MOVIDO
     public int getFrequentRenterPoints(int daysRented) {
         int frequentRenterPoints = 1;
 
-        // add bonus for a two day new release rental
         if ((getPriceCode() == Movie.NEW_RELEASE) &&
                 daysRented > 1) {
             frequentRenterPoints ++;
