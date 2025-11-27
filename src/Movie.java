@@ -24,11 +24,10 @@ public class Movie {
         return _title;
     }
 
-    // NOVO MÉTODO EXTRAÍDO E MOVIDO
     public double getCharge(int daysRented){
         double result = 0;
 
-        switch (getPriceCode()) { // Usa getPriceCode() da própria Movie
+        switch (getPriceCode()) {
             case REGULAR:
                 result += 2;
                 if (daysRented > 2)
@@ -44,5 +43,17 @@ public class Movie {
                 break;
         }
         return result;
+    }
+
+    // NOVO MÉTODO EXTRAÍDO E MOVIDO
+    public int getFrequentRenterPoints(int daysRented) {
+        int frequentRenterPoints = 1;
+
+        // add bonus for a two day new release rental
+        if ((getPriceCode() == Movie.NEW_RELEASE) &&
+                daysRented > 1) {
+            frequentRenterPoints ++;
+        }
+        return frequentRenterPoints;
     }
 }

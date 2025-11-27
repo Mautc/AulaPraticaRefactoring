@@ -16,18 +16,12 @@ public class Rental {
         return _movie;
     }
 
-    // MÉTODO DELEGADO: Apenas chama o novo método em Movie
     public double getCharge() {
         return _movie.getCharge(_daysRented);
     }
 
+    // MÉTODO DELEGADO: Apenas chama o novo método em Movie
     public int getFrequentRenterPoints() {
-        int frequentRenterPoints = 1;
-
-        if ((getMovie().getPriceCode() == Movie.NEW_RELEASE) &&
-                getDaysRented() > 1) {
-            frequentRenterPoints ++;
-        }
-        return frequentRenterPoints;
+        return _movie.getFrequentRenterPoints(_daysRented);
     }
 }
