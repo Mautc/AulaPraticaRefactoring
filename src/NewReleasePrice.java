@@ -3,8 +3,12 @@ public class NewReleasePrice extends Price {
         return Movie.NEW_RELEASE;
     }
 
-    // IMPLEMENTAÇÃO ESPECÍFICA PARA LANÇAMENTO
     public double getCharge(int daysRented){
         return daysRented * 3;
+    }
+
+    // IMPLEMENTAÇÃO SOBRESCRITA (CASO ESPECIAL)
+    public int getFrequentRenterPoints(int daysRented) {
+        return (daysRented > 1) ? 2: 1;
     }
 }
