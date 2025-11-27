@@ -5,22 +5,17 @@ public class Movie {
     public static final int  NEW_RELEASE = 1;
 
     private String _title;
-    // REMOVIDO: private int _priceCode;
-
-    // NOVO CAMPO: Usa a classe Price
     private Price _price;
 
     public Movie(String title, int priceCode) {
         _title = title;
-        setPriceCode(priceCode); // Chama o novo setPriceCode
+        setPriceCode(priceCode);
     }
 
-    // ATUALIZADO: Delega a responsabilidade para o objeto _price
     public int getPriceCode() {
         return _price.getPriceCode();
     }
 
-    // ATUALIZADO: Cria a classe de preço correta e atribui a _price
     public void setPriceCode(int arg) {
         switch (arg) {
             case REGULAR:
@@ -41,25 +36,9 @@ public class Movie {
         return _title;
     }
 
+    // MÉTODO DELEGADO: Apenas chama o novo método em Price
     public double getCharge(int daysRented){
-        double result = 0;
-
-        switch (getPriceCode()) {
-            case REGULAR:
-                result += 2;
-                if (daysRented > 2)
-                    result += (daysRented - 2) * 1.5;
-                break;
-            case NEW_RELEASE:
-                result += daysRented * 3;
-                break;
-            case CHILDRENS:
-                result += 1.5;
-                if (daysRented > 3)
-                    result += (daysRented - 3) * 1.5;
-                break;
-        }
-        return result;
+        return _price.getCharge(daysRented);
     }
 
     public int getFrequentRenterPoints(int daysRented) {
