@@ -36,18 +36,12 @@ public class Movie {
         return _title;
     }
 
-    // MÉTODO DELEGADO: Apenas chama o novo método em Price
     public double getCharge(int daysRented){
         return _price.getCharge(daysRented);
     }
 
+    // MÉTODO DELEGADO: Apenas chama o novo método em Price
     public int getFrequentRenterPoints(int daysRented) {
-        int frequentRenterPoints = 1;
-
-        if ((getPriceCode() == Movie.NEW_RELEASE) &&
-                daysRented > 1) {
-            frequentRenterPoints ++;
-        }
-        return frequentRenterPoints;
+        return _price.getFrequentRenterPoints(daysRented);
     }
 }
