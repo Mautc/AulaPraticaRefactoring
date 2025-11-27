@@ -17,22 +17,20 @@ public class Customer {
         return _name;
     }
 
-    // NOVO MÉTODO: Retorna a lista de aluguéis para a classe Statement acessar
     public Enumeration getRentals() {
         return _rentals.elements();
     }
 
-    // MÉTODO DELEGADO: Apenas chama a nova classe TextStatement
+    // Chamada corrigida para o método 'value' herdado em TextStatement
     public String statement() {
         return new TextStatement().value(this);
     }
 
-    // MÉTODO DELEGADO: Apenas chama a nova classe HtmlStatement
+    // Chamada corrigida para o método 'value' herdado em HtmlStatement
     public String htmlStatement() {
         return new HtmlStatement().value(this);
     }
 
-    // MUDANÇA: MÉTODO AGORA É PÚBLICO
     public double getTotalCharge() {
         double result = 0;
         Enumeration rentals = _rentals.elements();
@@ -43,7 +41,6 @@ public class Customer {
         return result;
     }
 
-    // MUDANÇA: MÉTODO AGORA É PÚBLICO
     public int getTotalFrequentRenterPoints(){
         int result = 0;
         Enumeration rentals = _rentals.elements();
